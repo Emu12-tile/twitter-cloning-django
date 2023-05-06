@@ -4,12 +4,22 @@
     <div class="col-8">
       <h1>Twitter</h1>
       {% for meep in meeps %}
-      <div class="alert alert-dark" role="alert">{{ meep }}</div>
+      <div class="alert alert-dark" role="alert">
+        {{ meep.body }}
+        <small class="text-muted"
+          >{{meep.created_at}} By {{meep.user.username}}</small
+        >
+      </div>
       <br /><br />
       {% endfor %}
     </div>
     <div class="col-4">
-        
+      {% if form %}
+      <form method="POST">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit" class="btn btn-secondary">Tweet!</button>
+      </form>
+      {% endif %}
     </div>
   </div>
 </div>

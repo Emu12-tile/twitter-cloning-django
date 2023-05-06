@@ -5,7 +5,13 @@
       <h1>{{profile.user.username}}'s Profile</h1>
       <br />
       {% if meeps %} {% for meep in meeps %}
-      <div class="alert alert-dark" role="alert">{{ meep }}</div>
+      <div class="alert alert-dark" role="alert">
+        {{ meep.body }} <br />
+        <small class="text-muted"
+          >{{meep.created_at}} By {{meep.user.username}}</small
+        >
+      </div><br>
+
       {% endfor %} {% endif %}
     </div>
 
