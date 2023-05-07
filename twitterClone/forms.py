@@ -1,7 +1,14 @@
 from django import forms
-from .models import Meep
+from .models import Meep,Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+
+# profile extra form
+class ProfilePicForm(forms.ModelForm):
+    profile_image=forms.ImageField(label="Profile Picture")
+    class Meta:
+        model=Profile
+        fields=('profile_image',)
 class MeepForm(forms.ModelForm):
     body=forms.CharField(required=True,
                          widget=forms.widgets.Textarea(attrs={
@@ -11,7 +18,7 @@ class MeepForm(forms.ModelForm):
                          label="",)
     class Meta:
         model=Meep
-        exclude=("user", )
+        exclude=("user","likes" )
 
 class SignUpForm(UserCreationForm):
     email=forms.EmailField(label="",widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':"email address"}))
